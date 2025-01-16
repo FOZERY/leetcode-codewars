@@ -7,8 +7,6 @@ Given the array nums after the possible rotation and an integer target, return t
 
 You must write an algorithm with O(log n) runtime complexity.
 
- 
-
 Example 1:
 
 Input: nums = [4,5,6,7,0,1,2], target = 0
@@ -53,4 +51,27 @@ const search = function (nums, target) {
 	}
 
 	return -1;
+};
+
+const search2 = function (nums, target) {
+	if (nums.length === 0) {
+		return -1;
+	}
+
+	let left = 0;
+	let right = nums.length - 1;
+
+	while (left <= right) {
+		let mid = Math.floor((left + right) / 2);
+
+		if (nums[mid] === target) {
+			return mid;
+		}
+
+		if (nums[left] <= nums[mid]) {
+			if (nums[mid] > target && target >= nums[left]) {
+				right = mid - 1;
+			}
+		}
+	}
 };
